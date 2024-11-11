@@ -1,20 +1,13 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { View, Text } from "react-native";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import HomeScreen from './src/screen/HomeScreen';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Entypo from '@expo/vector-icons/Entypo';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
 
 const App = () => {
   return (
@@ -31,7 +24,7 @@ const App = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ size, focused, color }) => {
-              return <AntDesign name={"home"} size={size} color={color} />;
+              return <Entypo name={"home"} size={size} color={color} />;
             },
           }}
         />
@@ -40,7 +33,7 @@ const App = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ size, focused, color }) => {
-              return <Ionicons name="reorder-three" size={size} color={color} />;
+              return <FontAwesome name="reorder" size={size} color={color} />;
             },
           }}
         />
@@ -49,7 +42,7 @@ const App = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ size, focused, color }) => {
-              return <AntDesign name="shoppingcart" size={size} color={color} />;
+              return <Ionicons name="cart" size={size} color={color} />;
             },
           }}
         />

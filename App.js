@@ -23,6 +23,7 @@ const App = () => {
         <Tab.Screen name="ACCOUNT" component={HomeScreen} />
       </Tab.Navigator>
     </NavigationContainer>
+    
   )
 }
 

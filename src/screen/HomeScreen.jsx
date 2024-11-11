@@ -1,7 +1,7 @@
 import { Platform, StyleSheet, View } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-
+import Header from "../components/Header";
 
 const HomeScreen = () => {
   return (
@@ -11,6 +11,7 @@ const HomeScreen = () => {
         colors={["rgba(0,0,0,0.5)", "transparent"]}
         style={styles.background}
       />
+      <Header />
     </View>
   );
 };
@@ -22,8 +23,8 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     backgroundColor: "white",
     marginTop: Platform.OS == "android" ? 25 : 0,
   },

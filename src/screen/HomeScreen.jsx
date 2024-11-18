@@ -10,6 +10,7 @@ import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
 import Category from "../components/Category";
+import ProductCatd from "../components/ProductCard";
 
 const HomeScreen = () => {
   return (
@@ -29,6 +30,10 @@ const HomeScreen = () => {
         <TextInput placeholder="Search" style={styles.textInput} />
       </View>
       <Category />
+      <View style={{ flexDirection: "row" }}>
+        <ProductCatd />
+        <ProductCatd />
+      </View>
     </View>
   );
 };
@@ -37,13 +42,11 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: "white",
     marginTop: Platform.OS == "android" ? 25 : 0,
     padding: 20,
   },
+
   background: {
     position: "absolute",
     left: 0,

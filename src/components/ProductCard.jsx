@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Text } from "react-native";
 import React from "react";
 import {Dimensions} from 'react-native';
 
@@ -14,6 +14,10 @@ const ProductCatd = () => {
           source={require("../assets/girl2.png")}
           style={styles.coverImage}
         />
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>Test</Text>
+          <Text style={styles.price}>$9.99</Text>
+        </View>
       </View>
     );
 };
@@ -27,8 +31,19 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   coverImage: {
-    height: windowHeight/2.5,
+    height: windowHeight/3,
     width: "windowWidth",
     borderRadius: 20,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#444444",
+  },
+  price: {
+    fontSize: 18,
+  },
+  contentContainer: {
+    padding: 10,
   },
 });

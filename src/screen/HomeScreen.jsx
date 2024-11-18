@@ -5,12 +5,13 @@ import {
   Text,
   Image,
   TextInput,
+  FlatList
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
 import Category from "../components/Category";
-import ProductCatd from "../components/ProductCard";
+import ProductCard from "../components/ProductCard";
 
 
 const HomeScreen = () => {
@@ -31,11 +32,11 @@ const HomeScreen = () => {
         <TextInput placeholder="Search" style={styles.textInput} />
       </View>
       <Category />
-      <View style={{ flexDirection: "row" }}>
-        <ProductCatd />
-        <ProductCatd />
-      </View>
-     
+      <FlatList
+        numColumns={2}
+        data={[1, 2, 3, 4, 5]}
+        renderItem={ProductCard}
+      />
     </View>
   );
 };

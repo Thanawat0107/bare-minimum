@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native";
 import React, {useState} from "react";
 import { Dimensions } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -7,9 +7,11 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const ProductCatd = () => {
-  console.log("ความกว้าง", windowWidth);
-  console.log("ความสูง", windowHeight);
-  const [isLiked, setIsLiked] = useState(false);
+//   console.log("ความกว้าง", windowWidth);
+//   console.log("ความสูง", windowHeight);
+
+  //const [isLiked, setIsLiked] = useState(false);
+   const isLiked = true;
   return (
     <View style={styles.container}>
       <Image
@@ -20,17 +22,13 @@ const ProductCatd = () => {
         <Text style={styles.title}>Test</Text>
         <Text style={styles.price}>$9.99</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => setIsLiked(!isLiked)}
-        style={styles.likeContainer}
-      >
+      <TouchableOpacity onPress={() => {}} style={styles.likeContainer}>
         {isLiked ? (
           <Entypo name="heart-outlined" size={24} color="red" />
         ) : (
-            <Entypo name="heart" size={24} color="red" />
+          <Entypo name="heart" size={24} color="red" />
         )}
       </TouchableOpacity>
-
     </View>
   );
 };

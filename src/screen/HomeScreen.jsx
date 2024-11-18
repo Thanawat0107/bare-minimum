@@ -12,6 +12,7 @@ import Header from "../components/Header";
 import Category from "../components/Category";
 import ProductCatd from "../components/ProductCard";
 
+
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
@@ -34,6 +35,7 @@ const HomeScreen = () => {
         <ProductCatd />
         <ProductCatd />
       </View>
+     
     </View>
   );
 };
@@ -46,7 +48,6 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS == "android" ? 25 : 0,
     padding: 20,
   },
-
   background: {
     position: "absolute",
     left: 0,

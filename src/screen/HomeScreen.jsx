@@ -1,7 +1,15 @@
-import { Platform, StyleSheet, View, Text, Image, TextInput } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TextInput,
+} from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
+import Category from "../components/Category";
 
 const HomeScreen = () => {
   return (
@@ -20,13 +28,12 @@ const HomeScreen = () => {
         />
         <TextInput placeholder="Search" style={styles.textInput} />
       </View>
+      <Category />
     </View>
   );
 };
 
-
 export default HomeScreen;
-
 
 const styles = StyleSheet.create({
   container: {

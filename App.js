@@ -9,6 +9,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDetailsScreen from "./src/screen/ProductDetailsScreen";
 import { enableScreens } from "react-native-screens";
+import CartScreen from "./src/screen/CartScreen";
 enableScreens();
 
 const Tab = createBottomTabNavigator();
@@ -58,7 +59,7 @@ const App = () => {
         />
         <Tab.Screen
           name="CART"
-          component={HomeScreen}
+          component={CartScreen}
           options={{
             tabBarIcon: ({ size, focused, color }) => {
               return <Ionicons name="cart" size={size} color={color} />;

@@ -11,7 +11,7 @@ const CartScreen = () => {
         colors={["rgba(38, 181, 185, 0.8)", "transparent"]}
         style={styles.background}
       />
-      <Header />
+      <Header isCart={true} />
     </View>
   )
 }

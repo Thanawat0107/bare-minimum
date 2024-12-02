@@ -31,10 +31,13 @@ const ProductDetailsScreen = () => {
   ];
 
   const handleAddToCart = () => {
-    product.color = selectedColor;
-    product.size = selectedSize;
-    addToCartItem(product);
-    navigation.navigate("CART")
+    const updatedProduct = {
+      ...product,        // คัดลอกค่าจาก product
+      color: selectedColor,
+      size: selectedSize,
+    };
+    addToCartItem(updatedProduct);
+    navigation.navigate("CART");
   };
 
   return (

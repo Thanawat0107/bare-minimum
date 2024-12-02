@@ -29,13 +29,13 @@ const ProductDetailsScreen = () => {
     "#1D752B",
     "#000000",
   ];
+
   const handleAddToCart = () => {
     product.color = selectedColor;
     product.size = selectedSize;
     addToCartItem(product);
     navigation.navigate("CART")
   };
-
 
   return (
     <View style={styles.container}>

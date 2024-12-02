@@ -1,10 +1,22 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    loadCartItems();
+  }, []);
+
+
+  const loadCartItems = async () => {
+    await AsyncStorage.getItem("cart").then((cartItems) => {
+      cartItems = JSON.parse(cartItems);
+      setCartItems(cartItems);
+    });
+  };
 
   const addToCartItem = async (item) => {
     let cartItems = await AsyncStorage.getItem("cart");

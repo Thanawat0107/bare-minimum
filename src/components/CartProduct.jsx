@@ -6,19 +6,19 @@ const imageUrl =
     "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/cwlk21f74nd9iamrlzkh.png";
 
 
-const CartProduct = () => {
+const CartProduct = ({ item }) => {
   return (
     <View style={styles.card}>
-    <Image source={{ uri: imageUrl }} style={styles.image} />
+    <Image source={{ uri: item.image }} style={styles.image} />
     <View style={styles.content}>
-      <Text style={styles.title}>JeanTest</Text>
-      <Text style={styles.price}>$9.99</Text>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.price}>${item.price}</Text>
       <View style={styles.textCircleContainer}>
         <View
-          style={[styles.circle, { backgroundColor: "red" }]}
+          style={[styles.circle, { backgroundColor:  item?.color || "red" }]}
         ></View>
         <View style={styles.sizeContainer}>
-          <Text style={styles.sizeText}>M</Text>
+          <Text style={styles.sizeText}>{item.size}</Text>
         </View>
       </View>
     </View>

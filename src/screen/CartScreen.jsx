@@ -6,12 +6,14 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
 import CartProduct from "../components/CartProduct";
+import { CartContext } from "../Context/CartContext";
 
 const CartScreen = () => {
+  const { cartItems } = useContext(CartContext);
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -21,8 +23,8 @@ const CartScreen = () => {
       <Header isCart={true} />
 
       <FlatList
-        data={[1, 2, 3, 4, 5]}
-        renderItem={({ item }) => <CartProduct />}
+        data={cartItems}
+        renderItem={({ item }) => <CartProduct item={item} />}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ marginTop: 40, paddingBottom: 200 }}
         ListFooterComponent={

@@ -5,16 +5,42 @@ import {
   Text,
   Image,
   TextInput,
-  FlatList
+  FlatList,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
 import Category from "../components/Category";
 import ProductCard from "../components/ProductCard";
-
+import data from "../data/data.json";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState(data.products);
+
+  const navigation = useNavigation();
+
+  // const [isLiked, setIsLiked] = useState(false);
+
+  const handleProductDetails = (item) => {
+    navigation.navigate("PRODUCT_DETAILS", { item });
+  };
+
+  const toggleFavorite = (item) => {
+    const newProduct = products.map((prod) => {
+      if (prod.id === item.id) {
+        console.log("prod: ", prod);
+        return {
+          ...prod,
+          isFavorite: !prod.isFavorite,
+        };
+      }
+      return prod;
+    });
+
+    setProducts(newProduct);
+  };
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -23,19 +49,34 @@ const HomeScreen = () => {
         style={styles.background}
       />
       <Header />
-      <Text style={styles.headerText}>Match Your Style</Text>
-      <View style={styles.inputContainer}>
-        <Image
-          source={require("../assets/search.png")}
-          style={styles.searchIcon}
-        />
-        <TextInput placeholder="Search" style={styles.textInput} />
-      </View>
-      <Category />
+
       <FlatList
         numColumns={2}
-        data={[1, 2, 3, 4, 5]}
-        renderItem={ProductCard}
+        ListHeaderComponent={
+          <>
+            <Text style={styles.headingText}>Match Your Style</Text>
+            <View style={styles.inputContainer}>
+              <Image
+                source={require("../assets/search.png")}
+                style={styles.searchIcon}
+              />
+              <TextInput placeholder="Search" style={styles.textInput} />
+            </View>
+
+            <Category />
+          </>
+        }
+        data={products}
+        renderItem={({ item, index }) => (
+          <ProductCard
+            key={index}
+            item={item}
+            toggleFavorite={toggleFavorite}
+            handleProductClick={handleProductDetails}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 150 }}
       />
     </View>
   );

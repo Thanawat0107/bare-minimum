@@ -1,39 +1,37 @@
-import { Image, StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native";
-import React, {useState} from "react";
+import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React from "react";
 import { Dimensions } from "react-native";
-import Entypo from "@expo/vector-icons/Entypo";
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const ProductCatd = () => {
-//   console.log("ความกว้าง", windowWidth);
-//   console.log("ความสูง", windowHeight);
-
-  //const [isLiked, setIsLiked] = useState(false);
-   const isLiked = true;
+const ProductCard = ({ item, toggleFavorite, handleProductClick }) => {
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("../assets/girl2.png")}
-        style={styles.coverImage}
-      />
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => handleProductClick(item)}
+    >
+      <Image source={{ uri: item.image }} style={styles.coverImage} />
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>Test</Text>
-        <Text style={styles.price}>$9.99</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.price}>${item.price}</Text>
       </View>
-      <TouchableOpacity onPress={() => {}} style={styles.likeContainer}>
-        {isLiked ? (
-          <Entypo name="heart-outlined" size={24} color="red" />
+
+      <TouchableOpacity
+        onPress={() => toggleFavorite(item)}
+        style={styles.likeContainer}
+      >
+        {item?.isFavorite ? (
+          <Ionicons name="heart-outline" size={24} color="red" />
         ) : (
-          <Entypo name="heart" size={24} color="red" />
+          <Ionicons name="heart" size={24} color="red" />
         )}
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-export default ProductCatd;
+export default ProductCard;
 
 const styles = StyleSheet.create({
   container: {
@@ -50,8 +48,8 @@ const styles = StyleSheet.create({
     top: 10,
   },
   coverImage: {
-    height: windowHeight / 3,
-    width: "windowWidth",
+    height: windowHeight / 4,
+    width: windowWidth / 2.5,
     borderRadius: 20,
   },
   title: {

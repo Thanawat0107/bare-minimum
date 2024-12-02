@@ -6,10 +6,11 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Header from "../components/Header";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import { CartContext } from "../Context/CartContext";
 
 const ProductDetailsScreen = () => {
   const route = useRoute();
@@ -17,6 +18,8 @@ const ProductDetailsScreen = () => {
 
   const [selectedSize, setSelectedSize] = useState("M");
   const [selectedColor, setSelectedColor] = useState("#B11D1D");
+  const { addToCartItem } = useContext(CartContext);
+  const navigation = useNavigation();
 
   const colorsArray = [
     "#91A1B0",
@@ -26,6 +29,13 @@ const ProductDetailsScreen = () => {
     "#1D752B",
     "#000000",
   ];
+  const handleAddToCart = () => {
+    product.color = selectedColor;
+    product.size = selectedSize;
+    addToCartItem(product);
+    navigation.navigate("CART")
+  };
+
 
   return (
     <View style={styles.container}>
@@ -98,7 +108,7 @@ const ProductDetailsScreen = () => {
 
            {/* cart button */}
            <View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity  onPress={handleAddToCart} style={styles.button}>
               <Text style={styles.buttonText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>

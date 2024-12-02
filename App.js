@@ -71,11 +71,7 @@ const App = () => {
 
                 return (
                   <View>
-                    <MaterialIcons
-                      name={"shopping-cart"}
-                      size={size}
-                      color={color}
-                    />
+                    <Ionicons name="cart-sharp" size={size} color={color} />
                     <View style={styles.badge}>
                       <Text style={{ color: "white", fontSize: 10 }}>
                         {cartItems.length}
@@ -86,7 +82,7 @@ const App = () => {
               },
             }}
           />
-          
+
           <Tab.Screen
             name="ACCOUNT"
             component={HomeScreen}

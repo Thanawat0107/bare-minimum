@@ -13,42 +13,56 @@ import CartProduct from "../components/CartProduct";
 import { CartContext } from "../Context/CartContext";
 
 const CartScreen = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, totalPrice } = useContext(CartContext);
+
+   // ตรวจสอบค่า null หรือ undefined
+   const itemsCount = cartItems?.length ?? 0;
   return (
     <View style={styles.container}>
       <LinearGradient
         colors={["rgba(38, 181, 185, 0.8)", "transparent"]}
         style={styles.background}
       />
-      <Header isCart={true} />
+      <Header isCart={true} itemCount={itemsCount} />
 
       <FlatList
-        data={cartItems}
+        data={cartItems || []}
         renderItem={({ item }) => <CartProduct item={item} />}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ marginTop: 40, paddingBottom: 200 }}
         ListFooterComponent={
           <>
-            <View style={styles.bottomContentContainer}>
+             {/* แสดงจำนวนสินค้า */}
+             <View style={styles.bottomContentContainer}>
               <View style={styles.flexRowContainer}>
-                <Text style={styles.titleText}>Total:</Text>
-                <Text style={styles.priceText}>$1000.00</Text>
+                <Text style={styles.titleText}>Items in Cart:</Text>
+                <Text style={styles.priceText}>{itemsCount}</Text>
               </View>
               <View style={styles.flexRowContainer}>
-                <Text style={styles.titleText}>Shpping:</Text>
-                <Text style={styles.priceText}>$50.0</Text>
+                <Text style={styles.titleText}>Total:</Text>
+                <Text style={styles.priceText}>${totalPrice || "0.00"}</Text>
+              </View>
+              <View style={styles.flexRowContainer}>
+                <Text style={styles.titleText}>Shipping:</Text>
+                <Text style={styles.priceText}>$0.0</Text>
               </View>
               <View style={styles.divider} />
               <View style={styles.flexRowContainer}>
                 <Text style={styles.titleText}>Grand Total:</Text>
                 <Text style={[styles.priceText, styles.grandPriceText]}>
-                  $1050.00
+                  ${totalPrice || "0.00"}
                 </Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Checkout</Text>
-            </TouchableOpacity>
+
+            {/* ตรวจสอบเงื่อนไข */}
+            {itemsCount > 0 ? (
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Checkout</Text>
+              </TouchableOpacity>
+            ) : (
+              <Text style={styles.emptyCartText}>Your cart is empty!</Text>
+            )}
           </>
         }
       />

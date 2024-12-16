@@ -2,6 +2,8 @@ import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { Dimensions } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { fonts } from "../utils/fonts";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -53,12 +55,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   title: {
+    fontFamily: fonts.BlackItalic,
     fontSize: 18,
     fontWeight: "700",
     color: "#444444",
   },
   price: {
     fontSize: 18,
+    fontFamily: fonts.BlackItalic,
   },
   contentContainer: {
     padding: 10,

@@ -17,6 +17,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
 import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import AccountScreen from "./src/screen/AccountScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -88,7 +89,7 @@ const TabsNavigator = () => {
 
     <Tab.Screen
       name="ACCOUNT"
-      component={HomeScreen}
+      component={AccountScreen}
       options={{
         tabBarIcon: ({ size, focused, color }) => {
           return (

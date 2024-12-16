@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    marginTop: Platform.OS == "android" ? 25 : 0,
+    //marginTop: Platform.OS == "android" ? 25 : 0,
     padding: 10,
   },
   background: {

@@ -140,6 +140,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    // marginTop: Platform.OS == "android" ? 25 : 0,
+    padding: 10,
   },
   background: {
     position: "absolute",

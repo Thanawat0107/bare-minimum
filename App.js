@@ -15,9 +15,13 @@ import CartScreen from "./src/screen/CartScreen";
 import { CartContext, CartProvider } from "./src/Context/CartContext";
 import { StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
+import "react-native-gesture-handler";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const MyHomeStack = () => {
   return (
@@ -32,6 +36,83 @@ const MyHomeStack = () => {
     </Stack.Navigator>
   );
 };
+
+const TabsNavigator = () => {
+  return (
+    <Tab.Navigator
+    screenOptions={{
+      headerShown: true,
+      tabBarShowLabel: false,
+      tabBarActiveTintColor: "red",
+    }}
+  >
+
+    <Tab.Screen
+      name="HOME_STACK"
+      component={MyHomeStack}
+      options={{
+        tabBarIcon: ({ size, focused, color }) => {
+          return <Entypo name={"home"} size={size} color={color} />;
+        },
+      }}
+    />
+    <Tab.Screen
+      name="REORDER"
+      component={HomeScreen}
+      options={{
+        tabBarIcon: ({ size, focused, color }) => {
+          return <FontAwesome name="reorder" size={size} color={color} />;
+        },
+      }}
+    />
+    <Tab.Screen
+      name="CART"
+      component={CartScreen}
+      options={{
+        tabBarIcon: ({ size, color }) => {
+          const { cartItems } = useContext(CartContext);
+
+          return (
+            <View>
+              <Ionicons name="cart-sharp" size={size} color={color} />
+              <View style={styles.badge}>
+                <Text style={{ color: "white", fontSize: 10 }}>
+                  {cartItems.length}
+                </Text>
+              </View>
+            </View>
+          );
+        },
+      }}
+    />
+
+    <Tab.Screen
+      name="ACCOUNT"
+      component={HomeScreen}
+      options={{
+        tabBarIcon: ({ size, focused, color }) => {
+          return (
+            <MaterialIcons
+              name="account-circle"
+              size={size}
+              color={color}
+            />
+          );
+        },
+      }}
+    />
+  </Tab.Navigator>
+  );
+};
+
+
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
 
 const App = () => {
   const [fontsLoaded, fontError] = useFonts({
@@ -48,69 +129,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <CartProvider>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: true,
-            tabBarShowLabel: false,
-            tabBarActiveTintColor: "red",
-          }}
-        >
-
-          <Tab.Screen
-            name="HOME_STACK"
-            component={MyHomeStack}
-            options={{
-              tabBarIcon: ({ size, focused, color }) => {
-                return <Entypo name={"home"} size={size} color={color} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name="REORDER"
-            component={HomeScreen}
-            options={{
-              tabBarIcon: ({ size, focused, color }) => {
-                return <FontAwesome name="reorder" size={size} color={color} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name="CART"
-            component={CartScreen}
-            options={{
-              tabBarIcon: ({ size, color }) => {
-                const { cartItems } = useContext(CartContext);
-
-                return (
-                  <View>
-                    <Ionicons name="cart-sharp" size={size} color={color} />
-                    <View style={styles.badge}>
-                      <Text style={{ color: "white", fontSize: 10 }}>
-                        {cartItems.length}
-                      </Text>
-                    </View>
-                  </View>
-                );
-              },
-            }}
-          />
-
-          <Tab.Screen
-            name="ACCOUNT"
-            component={HomeScreen}
-            options={{
-              tabBarIcon: ({ size, focused, color }) => {
-                return (
-                  <MaterialIcons
-                    name="account-circle"
-                    size={size}
-                    color={color}
-                  />
-                );
-              },
-            }}
-          />
-        </Tab.Navigator>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Home" component={TabsNavigator} />
+          <Drawer.Screen name="About" component={NotificationsScreen} />
+        </Drawer.Navigator>
       </CartProvider>
     </NavigationContainer>
   );

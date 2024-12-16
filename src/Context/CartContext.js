@@ -37,9 +37,19 @@ export const CartProvider = ({ children }) => {
     setTotalPrice(Number(totalSum.toFixed(2))); // แปลงกลับเป็นตัวเลข
   };
 
+  const deleteCartItem = async (id) => {
+    let cartItems = await AsyncStorage.getItem("cart");
+    cartItems = cartItems ? JSON.parse(cartItems) : [];
+    cartItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(cartItems);
+    calculateTotalPrice(cartItems);
+    await AsyncStorage.setItem("cart", JSON.stringify(cartItems));
+  };
+
   const value = {
     cartItems,
     addToCartItem,
+    deleteCartItem,
     totalPrice,
   };
 

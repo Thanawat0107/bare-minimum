@@ -1,12 +1,14 @@
 import { TouchableOpacity,Image,StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-
+import React, { useContext } from 'react'
+import { CartContext } from "../Context/CartContext";
 
 const imageUrl =
     "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/cwlk21f74nd9iamrlzkh.png";
 
 
 const CartProduct = ({ item }) => {
+  const { deleteCartItem} = useContext(CartContext);
+
   return (
     <View style={styles.card}>
     <Image source={{ uri: item.image }} style={styles.image} />
@@ -22,7 +24,7 @@ const CartProduct = ({ item }) => {
         </View>
       </View>
     </View>
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={() => deleteCartItem(item.id)}>
       <Image
         source={require("../assets/deleteIcon.png")}
         style={styles.deleteIcon}
